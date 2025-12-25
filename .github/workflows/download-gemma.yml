@@ -1,0 +1,27 @@
+name: Download Gemma GGUF
+
+on:
+  workflow_dispatch:  # ניתן להריץ ידנית
+  schedule:
+    - cron: '0 0 * * 0'  # פעם בשבוע (אופציונלי)
+
+jobs:
+  download-and-upload:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Download Gemma GGUF
+        run: |
+          # הורדת Gemma 2B Q4_K_M - מותאם ל-16GB RAM
+          wget -O gemma-2b-q4.gguf https://huggingface.co/lmstudio-community/gemma-2-2b-it-GGUF/resolve/main/gemma-2-2b-it-Q4_K_M.gguf
+          
+      - name: Verify download
+        run: |
+          ls -lh gemma-2b-q4.gguf
+          
+      - name: Upload as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gemma-2b-q4-gguf
+          path: gemma-2b-q4.gguf
+          retention-days: 30  # כמה ימים לשמור את ה-artifact
