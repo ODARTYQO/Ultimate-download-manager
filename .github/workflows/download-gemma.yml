@@ -12,16 +12,16 @@ jobs:
     steps:
       - name: Download Gemma GGUF
         run: |
-          # הורדת Gemma 2 7B Q4_K_M - מותאם ל-16GB RAM
-          wget -O gemma-7b-q4.gguf https://huggingface.co/lmstudio-community/gemma-2-9b-it-GGUF/resolve/main/gemma-2-9b-it-Q4_K_M.gguf
+          # הורדת Gemma 3 9B Q4_K_M - הגרסה החדשה והטובה ביותר ל-16GB RAM
+          wget -O gemma3-9b-q4.gguf https://huggingface.co/bartowski/gemma-3-9b-it-GGUF/resolve/main/gemma-3-9b-it-Q4_K_M.gguf
           
       - name: Verify download
         run: |
-          ls -lh gemma-7b-q4.gguf
+          ls -lh gemma3-9b-q4.gguf
           
       - name: Upload as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: gemma-7b-q4-gguf
-          path: gemma-7b-q4.gguf
+          name: gemma3-9b-q4-gguf
+          path: gemma3-9b-q4.gguf
           retention-days: 30  # כמה ימים לשמור את ה-artifact
